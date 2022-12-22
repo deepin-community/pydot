@@ -1,0 +1,32 @@
+Source: pydot
+Section: python
+Priority: optional
+Maintainer: Sandro Tosi <morph@debian.org>
+Uploaders: Debian Python Team <team+python@tracker.debian.org>,
+Build-Depends: debhelper-compat (= 13),
+               dh-python,
+               graphviz,
+               python3-all,
+               python3-setuptools,
+Build-Depends-Indep: python3-chardet,
+                     python3-pyparsing (>= 2.0.1+dfsg1),
+Standards-Version: 4.5.1
+Vcs-Git: https://salsa.debian.org/python-team/packages/pydot.git
+Vcs-Browser: https://salsa.debian.org/python-team/packages/pydot
+Homepage: https://github.com/pydot/pydot
+
+Package: python3-pydot
+Architecture: all
+Depends: graphviz,
+         python3-pyparsing (>= 2.0.1+dfsg1-1),
+         ${misc:Depends},
+         ${python3:Depends},
+Description: Python interface to Graphviz's dot (Python 3)
+ pydot allows one to easily create both directed and non directed graphs from
+ Python. Currently all attributes implemented in the Dot language are supported.
+ .
+ Output can be inlined in Postscript into interactive scientific environments
+ like TeXmacs, or output in any of the format's supported by the Graphviz tools
+ dot, neato, twopi.
+ .
+ This package contains pydot for Python 3.

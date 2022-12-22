@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	-PYBUILD_SYSTEM=custom PYBUILD_TEST_ARGS="PYTHONPATH={build_dir} {interpreter} test/pydot_unittest.py --no-check" dh_auto_test
+endif

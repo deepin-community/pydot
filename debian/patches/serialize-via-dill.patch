@@ -1,0 +1,28 @@
+--- a/pydot.py
++++ b/pydot.py
+@@ -427,7 +427,11 @@ class Common(object):
+ 
+     def __setstate__(self, state):
+ 
+-        self.obj_dict = state
++        self.obj_dict = state['obj_dict']
++
++    def __reduce__(self):
++        state = self.__dict__.copy()
++        return (Common, (), state, )
+ 
+ 
+     def __get_attribute__(self, attr):
+@@ -1743,7 +1747,11 @@ class Dot(Graph):
+ 
+     def __setstate__(self, state):
+ 
+-        self.obj_dict = state
++        self.obj_dict = state['obj_dict']
++
++    def __reduce__(self):
++        state = self.__dict__.copy()
++        return (Dot, (), state, )
+ 
+ 
+     def set_shape_files(self, file_paths):

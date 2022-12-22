@@ -1,0 +1,214 @@
+pydot (1.4.2-1) unstable; urgency=low
+
+  [ Debian Janitor ]
+  * Bump debhelper dependency to >= 9, since that's what is used in
+    debian/compat.
+  * Bump debhelper from deprecated 9 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Ondřej Nový ]
+  * d/control: Update Vcs-* fields with new Debian Python Team Salsa
+    layout.
+
+  [ Sandro Tosi ]
+  * New upstream release
+  * Use the new Debian Python Team contact name and address
+  * debian/copyright
+    - fix typo in upstream copyright name
+    - extend packaging copyright years
+  * Update upstream refs to point to https://github.com/pydot/pydot
+  * debian/patches/PR211.patch
+    - drop patch, merged upstream
+  * debian/control
+    - bump Standards-Version to 4.5.1 (no changes needed)
+    - bump dh compat to 13
+  * debian/source/include-binaries
+    - removed, no longer needed
+
+ -- Sandro Tosi <morph@debian.org>  Mon, 15 Feb 2021 18:07:38 -0500
+
+pydot (1.4.1-3) unstable; urgency=medium
+
+  * Drop python2 support; Closes: #937425
+  * debian/patches/PR211.patch
+    - fix failure in tests, test_graphviz_regression_tests
+  * debian/rules
+    - ignore testsuite failures for now, currently test_graph_pickling
+
+ -- Sandro Tosi <morph@debian.org>  Thu, 09 Jan 2020 10:31:33 -0500
+
+pydot (1.4.1-2) unstable; urgency=medium
+
+  * debian/patches/serialize-via-dill.patch
+    - allow dill to serialize Dot objects
+
+ -- Sandro Tosi <morph@debian.org>  Thu, 03 Oct 2019 15:10:00 -0400
+
+pydot (1.4.1-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Convert git repository from git-dpm to gbp layout
+
+  [ Sandro Tosi ]
+  * New upstream release
+  * remove patches and run tests with --no-check
+  * debian/control
+    - bump Standards-Version to 4.2.1 (no changes needed)
+
+ -- Sandro Tosi <morph@debian.org>  Sat, 22 Dec 2018 17:33:20 -0500
+
+pydot (1.2.4-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Set Vcs-* to salsa.debian.org
+  * d/copyright: Use https protocol in Format field
+
+  [ Yaroslav Halchenko ]
+  * d/docs; install all README* (upstream file got .md extension now)
+
+  [ Sandro Tosi ]
+  * New upstream release
+  * debian/patches
+    - removed, applied upstream
+  * debian/patches/0001-dont-check-if-we-are-in-the-current-dir.patch
+    - allow tests to run from the current directory
+  * debian/control
+    - bump Standards-Version to 4.1.4 (no changes needed)
+  * debian/copyright
+    - extend packaging copyright years
+
+ -- Sandro Tosi <morph@debian.org>  Sat, 09 Jun 2018 14:22:28 -0400
+
+pydot (1.2.3-1) unstable; urgency=medium
+
+  [ Sandro Tosi ]
+  * new upstream release; Closes: #868857
+  * debian/watch
+    - update to match new upstream tag format
+  * debian/patches/01-setup-py-nodata.patch
+    - drop, merged upstream (as of 69dce47)
+  * debian/patches/0002-support-python3.patch
+    - drop, applied upstream (as of cb0dfe1)
+  * debian/unittest/*
+    - remove as tests are now shipped in upstream tarball
+  * debian/copyright
+    - extend packaging copyright years
+    - update upstream copyright notice
+  * debian/control
+    - bump Standards-Version to 4.1.1 (no changes needed)
+    - add chardet to b-d-i, needed by tests
+  * debian/rules
+    - run tests from the upstream test/ dir
+    - dont fail if tests fail
+  * debian/patches/crlf-to-lf.patch
+    - restore upstream test files with CRLF which were converted to LF by git
+  * debian/compat
+    - bump to compat level 9
+
+  [ Ondřej Nový ]
+  * Fixed VCS URL (https)
+
+ -- Sandro Tosi <morph@debian.org>  Sat, 25 Nov 2017 16:57:34 -0500
+
+pydot (1.0.28-2) unstable; urgency=medium
+
+  * debian/{control, copyright}
+    - update upstream website references
+  * Replace all the patches with the code from gh:nlhepler/pydot for py3k
+    support; Closes: #745021, #745022, #792022, #808223
+  * debian/control
+    - bump Standards-Version to 3.9.6 (no changes needed)
+  * debian/watch
+    - point to github
+  * debian/copyright
+    - extend packaging copyright years
+
+ -- Sandro Tosi <morph@debian.org>  Sun, 10 Jan 2016 02:01:49 +0000
+
+pydot (1.0.28-1) unstable; urgency=low
+
+  [ Sandro Tosi ]
+  * New upstream release; Closes: #638869
+    - fixes crash during DOT string conversion; Closes: #639993
+  * debian/control
+    - switch Vcs-Browser field to viewsvn
+    - adopt package: thanks Peter for the work you did; Closes: #739875
+    - updated Homepage field; Closes: #686390
+    - bump Standards-Version to 3.9.5 (no changes needed)
+    - removed Conflict, no longer needed (version already superseded in stable)
+    - removed old XB-P-V, no longer needed
+    - added misc:Depends to binary package
+    - extend long description
+    - bump python-pyparsing dependecies on v2
+    - added python{,3}-setuptools, graphviz  to b-d
+  * debian/copyright
+    - converted to DEP-5 format
+    - updated as per new upstream release
+  * debian/patches/01-setup-py-nodata.patch
+    - refreshed
+  * Converted to 3.0 (quilt) source format
+  * debian/{control, rules}
+    - converted to dh sequencer
+  * debian/{pycompat, pyversions}
+    - removed, no longer needed
+  * Switch to dh_python2
+  * debian/patches/support-pyparsing-v2.patch
+    - support pyparsing v2 module; Closes: #729085
+  * Support Python3; Closes: #739858
+  * debian/patches/handle-double-quoted-strings-with-escaped-quotes.patch
+    - proper handle of double quoted strings with escaped quotes
+  * Added (from upstream SVN) unittest files and execute them at build time
+
+  [ Jakub Wilk ]
+  * Use canonical URIs for Vcs-* fields.
+  * Remove DM-Upload-Allowed; it's no longer used by the archive
+    software.
+
+ -- Sandro Tosi <morph@debian.org>  Sat, 22 Mar 2014 23:35:02 +0100
+
+pydot (1.0.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/01-setup-py-nodata.patch: patched setup.py to stop
+    data files being installed to /usr
+  * debian/pyversions, debian/control: package now works with only
+    Python 2.4+
+  * debian/control:
+    - dependency on python-parsing changed to (>= 1.4.10) due to
+      nestedExpr symbol requirement
+    - added Conflicts on dot2tex (<< 2.8.0) due to incompatibility
+    - added DM-Upload-Allowed: yes
+    - moved python-support to Build-Depends as required for clean target
+    - changed Section to python
+  * debian/copyright: updated year
+  * debian/watch: escaped the dots
+
+ -- Peter Collingbourne <pcc03@doc.ic.ac.uk>  Mon, 26 May 2008 15:35:04 +0100
+
+pydot (0.9.10-3) UNRELEASED; urgency=low
+
+  * debian/control
+    - uniforming Vcs-Browser field
+
+ -- Sandro Tosi <matrixhasu@gmail.com>  Thu, 03 Jan 2008 11:53:11 +0100
+
+pydot (0.9.10-2) unstable; urgency=low
+
+  * debian/copyright: Rewrapped to 80 characters per line
+  * debian/watch: Updated with new download location (closes: #450120)
+  * debian/control:
+    - added Debian Python Modules Team to Uploaders
+    - added Homepage, Vcs-Browser, Vcs-Svn fields
+    - removed Provides field
+    - changed python-all-dev to python in Build-Depends
+    - moved packages from Build-Depends to Build-Depends-Indep
+
+ -- Peter Collingbourne <pcc03@doc.ic.ac.uk>  Mon, 12 Nov 2007 19:29:39 +0000
+
+pydot (0.9.10-1) unstable; urgency=low
+
+  * Initial release (Closes: #397663)
+
+ -- Peter Collingbourne <pcc03@doc.ic.ac.uk>  Wed,  8 Nov 2006 15:52:04 +0000
