@@ -4,6 +4,91 @@ Pydot versions since 1.4.2 adhere to [PEP 440-style semantic versioning]
 (https://www.python.org/dev/peps/pep-0440/#semantic-versioning).
 
 
+2.0.0 (2023-12-30)
+------------------
+
+Changed:
+- Broken parsing caused by `pyparsing` updates fixed. (#296)
+  With this, the pydot project rises from the dead.
+- (Internal) CI revived by @ferdnyc. (#302)
+  Modernized and clarified the development process.
+  Testing is done against multiple Python versions.
+- Reorganized package/module structure. (#230)
+  The `pydot` package is installed as a directory now instead of as
+  two modules:
+
+      Before (pydot 0.x, 1.x)    After (pydot 2.x)
+
+      site-packages/             site-packages/
+      |-- pydot.py               `-- pydot/
+      `-- dot_parser.py              |-- __init__.py
+                                     |-- core.py
+                                     |-- dot_parser.py
+                                     `-- exceptions.py
+
+  This is mostly an internal change that should go unnoticed by most
+  users, especially those upgrading through `pip` or a software
+  distribution. `import pydot` should work as it did before.
+  Special cases:
+  - `import dot_parser` no longer works. Change it to
+    `from pydot import dot_parser` or see if you can use the wrappers
+    `pydot.graph_from_dot_data()` or `pydot.graph_from_dot_file()`.
+
+    **USER FEEDBACK REQUESTED**
+    We assume pydot users do not often directly `import dot_parser`.
+    If you do, please report your reasons, so that we can consider
+    making it available again before the final release of pydot 2.0:
+    https://github.com/pydot/pydot/issues/230
+
+  - If you use pydot from a (cloned) pydot source tree:
+    - The pydot source modules moved from the top directory to
+      subdirectory `src/pydot/`.
+    - When using a `PYTHONPATH` environment variable: Append `/src`,
+      e.g. `PYTHONPATH=~/Development/pydot/src`. If you need to switch
+      between pydot 1.x and pydot 2.x, add both, e.g.
+      `PYTHONPATH=~/Development/pydot/src:~/Development/pydot`
+    - When using an editable install (development mode): Re-run
+      `pip install -e .` from the top directory of the source tree to
+      update the links.
+  - For users of the test suite:
+    - The test suite no longer refuses to run from the top of the
+      source tree.
+    - This makes the test suite option `--no-check` redundant. It has
+      no effect except for printing a deprecation warning. It will be
+      removed in a future major release (pydot 3 or higher), then
+      leading to an error.
+- Reorganized exception hierarchy: (#230)
+  - New base class `PydotException`, derived from Python's `Exception`.
+  - Pydot's `Error` exception class is now derived from `PydotException`
+    instead of from Python's built-in `Exception` directly. Existing
+    handlers should not be affected.
+  - Exception class `InvocationException` was removed. It has not been
+    raised by pydot since 2016 (v1.2.0).
+
+- API (minor): Renamed the first parameter of the parser functions
+  listed below from `str` to `s`. These functions primarily exist for
+  internal use and would normally be called using positional arguments,
+  so few users should be affected. (#229)
+      push_top_graph_stmt(s, loc, toks)
+      push_graph_stmt(s, loc, toks)
+      push_subgraph_stmt(s, loc, toks)
+      push_default_stmt(s, loc, toks)
+      push_attr_list(s, loc, toks)
+      push_edge_stmt(s, loc, toks)
+
+Deprecated:
+- Test suite option `--no-check`. See "Reorganized package/module
+  structure" above.
+
+Removed:
+- Drop support for Python 2 and Python < 3.7. (#229, #302, #296).
+  **USER FEEDBACK REQUESTED**
+  ~~We are considering if pydot 2.0 should drop support for Python 3.5
+  and 3.6 as well. If this would affect you, please leave a comment in
+  https://github.com/pydot/pydot/issues/268.~~
+  EDIT: This was decided to be done, with a lot of time passed since this entry.
+
+
 1.4.2 (2021-02-15)
 ------------------
 

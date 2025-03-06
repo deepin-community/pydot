@@ -1,8 +1,14 @@
 #!/usr/bin/make -f
 
+UPSTREAM_GIT := https://github.com/pydot/pydot
+include /usr/share/openstack-pkg-tools/pkgos.make
+
 %:
 	dh $@ --with python3 --buildsystem=pybuild
 
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f test.svg
 
 override_dh_auto_test:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
