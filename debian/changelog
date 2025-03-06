@@ -1,3 +1,44 @@
+pydot (2.0.0-3) unstable; urgency=medium
+
+  * Cleans better (Closes: #1045513).
+
+ -- Thomas Goirand <zigo@debian.org>  Tue, 07 May 2024 10:31:34 +0200
+
+pydot (2.0.0-2) unstable; urgency=medium
+
+  * Uploading to unstable.
+
+ -- Thomas Goirand <zigo@debian.org>  Sun, 07 Apr 2024 22:50:36 +0200
+
+pydot (2.0.0-1) experimental; urgency=medium
+
+  * Adopt the package (Closes: #1065231):
+    - Set the team as maintainer, myself as uploader.
+    - Switch to git tag based workflow.
+    - Fix VCS URLs.
+  * Ran wrap-and-sort -bastk.
+  * Removed python3 mention from descriptions.
+  * Add openstack-pkg-tools as build-depends.
+  * Rebased serialize-via-dill.patch and add patch header. There was zero
+    comment in the patch, so I have no idea why it is there, and what it is
+    doing, though I'm leaving it as-is for the moment.
+  * Add removed-test_graph_pickling.patch.
+  * Add autopkgtest.
+
+ -- Thomas Goirand <zigo@debian.org>  Fri, 15 Mar 2024 08:59:06 +0100
+
+pydot (1.4.2-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster:
+    + Build-Depends-Indep: Drop versioned constraint on python3-pyparsing.
+    + python3-pydot: Drop versioned constraint on python3-pyparsing in Depends.
+
+  [ Sandro Tosi ]
+  * orphan
+
+ -- Sandro Tosi <morph@debian.org>  Sat, 02 Mar 2024 00:28:32 -0500
+
 pydot (1.4.2-1) unstable; urgency=low
 
   [ Debian Janitor ]
